@@ -1,0 +1,117 @@
+# jsWeb - Simple Web Server with Javascript
+
+jsWeb is a program to simplify web api based on express development.
+After installed jsweb, just write the express request handle js file and put them to the correctly directlry. Start with command:
+
+```
+  > jsweb [/path/to/api/home]
+```
+
+# Features
+
+* Do not need deal with express
+* Directory structure map to http url, sub folders support
+* Multiple port support, each port is a standalone process
+* Auto reload, Add/Modify/Delete file doesn't need restart server
+* Plugins load before real api method load to prepare system like database object or connection
+
+
+# Step by step
+
+## Step 1 : Install jsweb as system command
+```
+    > sudo npm install jsweb -g
+```
+## Step 2 : Test if jsweb install correctly
+
+```
+   > jsweb
+   Can not find any directory contain jsWeb at : /home/usersrc/jsweb
+   Please visit https://github.com/jsplne/jsweb for more details.
+   
+```
+
+## Step 3 : Create your app directory or get demos
+```
+   get demo project from https://github.com/jsplne/jsweb/demos
+```
+
+## Step 4 : Run
+```
+  > jsweb [/path/to/api/home]
+```
+
+## Step 5 : Test the result
+```
+  > wget -q -O- "http://localhost:8000/api/test/hello"
+```
+
+
+# Namings
+
+## Port name
+
+```
+   <port name> = <port>[<[mount point]>]
+        <port> = <number> 1 - 65535   below 1024 in linux need root account
+<mount ppoint> = [path[#path[#path]]]
+```
+
+* For example: `8000[api]` will map folder `<api home>/8000[api]/root` to `http://host:8000/api/`
+* For example: `8000[api#group1]` will map `<api home>/8000[api#group1]/root` to `http://host:8000/api/group1`
+
+
+## API name
+
+```
+   <api file name> = <api>[<[http method]>].js
+             <api> = the last section of url path
+     <http method> = standand http method like GET/POST..., default to GET method.
+```
+
+* For example `get-system-id.js` create api of `/get-system-id` api to take response of http GET of `/get-system-id`.
+* For example `upload[POST].js` create api of `/upload` api to take response of http POST to `/upload`.
+
+
+# Runtime data structure
+
+Http request handler function is called by express. jsweb object a property of express object : `req.app`
+
+```
+    req.app.jsweb = {
+        db : {
+            pg    : <function to access Postgresql>
+            mysql : <function to access Mysql>
+            mssql : <function to access Sql server>
+        }
+    }
+```
+
+# Enable/Disable file
+
+Set/clear file execute flag of files to enable/disable init file or web api file to be load.
+
+# API home directory structure (demos/api-root-test-simple)
+
+```
+  <API HOME> +
+             |
+             +--"8000[#api#test           // http://localhost:8000/api/test/*
+             |     +------ config         // not used now
+             |     +------ init
+             |     |        +-- 01-db-pg.js     // for Postgresql
+             |     |        +-- 02-db-mssql.js  // for Sql server
+             |     |        +-- 02-db-mysql.js  // for Mysql
+             |     |
+             |     +------ root
+             |              +-- hello.js     // http://localhost:8000/api/test/hello
+             |              +-- echo.js      // http://localhost:8000/api/test/echo
+             |              +-- db-query.js  // http://localhost:8000/api/test/db-query
+             |              +-- other
+             |                  +-- hello.js     // http://localhost:8000/api/test/other/hello
+             |                  +-- echo.js      // http://localhost:8000/api/test/other/echo
+             +--<port 2>
+             | 
+             ...
+
+```

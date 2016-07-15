@@ -1,0 +1,30 @@
+{
+    "name": "jsweb",
+    "version": "0.0.1",
+    "description": "A Simple Web Server with js.",
+    "main": "index.js",
+    "bin": {
+        "jsweb": "bin/jsweb.js"
+    },
+    "dependencies": {
+        "pg"          : "*",
+        "mssql"       : "*",
+        "mysql"       : "*",
+        "st"          : "*",
+        "express"     : "*",
+        "body-parser" : "*"
+    },
+    "scripts": {
+    },
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:jsPLNE/jsweb.git"
+    },
+    "keywords": [
+        "web",
+        "api",
+        "framework"
+    ],
+    "author": "Gxy",
+    "license": "MIT"
+}
