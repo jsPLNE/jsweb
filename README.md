@@ -4,15 +4,14 @@ jsWeb is a program to simplify web api based on express development.
 After installed jsweb, just write the express request handle js file and put them to the correctly directlry. Start with command:
 
 ```
-  > jsweb [/path/to/api/home]
+  > jsweb [/path/to/site/home]
 ```
 
 # Features
 
-* Do not need deal with express
-* Directory structure map to http url, sub folders support
+* Everythings of the site in single folder.
 * Multiple port support, each port is a standalone process
-* Auto reload, Add/Modify/Delete file doesn't need restart server
+* Auto reload, Add/Modify/Delete api file doesn't need restart server
 * Plugins load before real api method load to prepare system like database object or connection
 
 
@@ -38,30 +37,23 @@ After installed jsweb, just write the express request handle js file and put the
 
 ## Step 4 : Run
 ```
-  > jsweb [/path/to/api/home]
+  > jsweb [/path/to/web/site/home]
 ```
 
 ## Step 5 : Test the result
 ```
-  > wget -q -O- "http://localhost:8000/api/test/hello"
+  > wget -q -O- "http://localhost:8000/api/hello"
 ```
 
 
 # Namings
 
-## Port name
+## API folder name
 
-```
-   <port name> = <port>[<[mount point]>]
-        <port> = <number> 1 - 65535   below 1024 in linux need root account
-<mount ppoint> = [path[#path[#path]]]
-```
+By default every file inside the `<home>` folder is a static web site.
+To make a folder contain api js file, just add `api::` to that folder name. Somethings like `api::api` will map this folder to `http://host:port/api/*`
 
-* For example: `8000[api]` will map folder `<api home>/8000[api]/root` to `http://host:8000/api/`
-* For example: `8000[api#group1]` will map `<api home>/8000[api#group1]/root` to `http://host:8000/api/group1`
-
-
-## API name
+## API method name
 
 ```
    <api file name> = <api>[<[http method]>].js

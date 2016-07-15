@@ -24,40 +24,11 @@ function get_ports(path) {
     var ports = [];
     for (var i = 0; i < files.length; i++) {
         var file        = files[i];
+        if (!/\d+/.test(file)) { continue; };
         var base        = api_root + "/" + file;
-        var mount_point = "/";
-        var port        = file;
-        if (port.slice(-1) === ']') {
-            j = port.lastIndexOf("[");
-            if (j > 0) {
-                mount_point = port.substring(j + 1);
-                mount_point = mount_point.substring(0, mount_point.length - 1);
-                port = port.substring(0, j);
-            }
-        }
-        if (!(/\d+/.test(port))) { continue; };
-        if (!fs.statSync(base).isDirectory()) {
-            continue;
-        };
-        port = parseInt(port, 10);
-        if (port <=0 || port > 65535) { continue; };
-        if (!(/[Ww]in.*/.test(process.platform))
-            && port <= 1024
-            && process.getuid() !== 0) {
-            console.log("Port below 1024. Need root user right for: port [%s]", port);
-            process.exit(-1);
-        }
-        mount_point = mount_point.replace(/#/g, '/');
-        if (mount_point[0] !== '/') {
-            mount_point = '/' + mount_point;
-        }
-        if (mount_point.substr(-1) === '/') {
-            mount_point = mount_point.substring(0, mount_point.length - 1);
-        }
         ports.push({
-            port : port,
-            base : base,
-            mount_point : mount_point
+            port : parseInt(file, 10),
+            base : base
         })
     }
     return ports;
@@ -72,8 +43,6 @@ var child_process = require('child_process');
 var servers = [];
 for (var i = 0; i < ports.length; i++) {
     servers.push(child_process.fork(jsweb_home + "/lib/jsweb-server.js",
-                                    [ports[i].port,
-                                     ports[i].base,
-                                     ports[i].mount_point]));
+                                    [ports[i].port, ports[i].base]));
 };
 
