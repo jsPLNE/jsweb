@@ -15,6 +15,9 @@ After installed jsweb, just write the express request handle js file and put the
 * Plugins load before real api method load to prepare system like database object or connection
 
 
+** NOTICE for windows user: use `#` instead `::` as api folder prefix delimiter**
+
+
 # Step by step
 
 ## Step 1 : Install jsweb as system command
