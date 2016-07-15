@@ -25,9 +25,15 @@ function get_ports(path) {
     for (var i = 0; i < files.length; i++) {
         var file        = files[i];
         if (!/\d+/.test(file)) { continue; };
-        var base        = api_root + "/" + file;
+        var port = parseInt(file, 10);
+        if (port < 0 || port > 65535) { continue; };
+        if (port < 1024 && process.getuid() !== 0) {
+            console.log("Port < 1024 need root user");
+            process.exit(-2);
+        };
+        var base = api_root + "/" + file;
         ports.push({
-            port : parseInt(file, 10),
+            port : port,
             base : base
         })
     }
