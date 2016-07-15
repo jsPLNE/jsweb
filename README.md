@@ -35,7 +35,8 @@ After installed jsweb, just write the express request handle js file and put the
 
 ## Step 3 : Create your app directory or get demos
 ```
-   get demo project from https://github.com/jsplne/jsweb/demos
+   get demo project from https://github.com/jsplne/jsweb-demo-linux
+   get demo project from https://github.com/jsplne/jsweb-demo-windows
 ```
 
 ## Step 4 : Run
@@ -91,20 +92,26 @@ Set/clear file execute flag of files to enable/disable init file or web api file
 ```
   <API HOME> +
              |
-             +--"8000[#api#test           // http://localhost:8000/api/test/*
-             |     +------ config         // not used now
+             +--"8000"
+             |     +------ config
+             |     |        +-- jsweb-config.json
+             |     |
              |     +------ init
              |     |        +-- 01-db-pg.js     // for Postgresql
              |     |        +-- 02-db-mssql.js  // for Sql server
              |     |        +-- 02-db-mysql.js  // for Mysql
              |     |
              |     +------ root
-             |              +-- hello.js     // http://localhost:8000/api/test/hello
-             |              +-- echo.js      // http://localhost:8000/api/test/echo
-             |              +-- db-query.js  // http://localhost:8000/api/test/db-query
-             |              +-- other
-             |                  +-- hello.js     // http://localhost:8000/api/test/other/hello
-             |                  +-- echo.js      // http://localhost:8000/api/test/other/echo
+             |              +-- api::test           // in windows, use 'api#test', linux work's for both
+             |              |      +-- hello.js     // http://localhost:8000/api/test/hello
+             |              |      +-- echo.js      // http://localhost:8000/api/test/echo
+             |              |      +-- db-query.js  // http://localhost:8000/api/test/db-query
+             |              |      +-- other
+             |              |          +-- hello.js     // http://localhost:8000/api/test/other/hello
+             |              |          +-- echo.js      // http://localhost:8000/api/test/other/echo
+             |              +-- index.html
+             |              +-- others
+             |                    +-- others
              +--<port 2>
              | 
              ...
