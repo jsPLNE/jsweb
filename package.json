@@ -1,6 +1,6 @@
 {
     "name": "jsweb",
-    "version": "0.0.17",
+    "version": "0.0.18",
     "description": "A Simple Web Server with js.",
     "main": "index.js",
     "bin": {
@@ -8,6 +8,7 @@
     },
     "dependencies": {
         "pg"          : "*",
+        "hjs"         : "*",
         "mssql"       : "*",
         "mysql"       : "*",
         "st"          : "*",
