@@ -95,7 +95,7 @@ Set/clear file execute flag of files to enable/disable init file or web api file
 ```
   <API HOME> +
              |
-             +--"8000"
+             +--"8000"                         // port to listen
              |     +------ config
              |     |        +-- jsweb-config.json
              |     |
@@ -103,6 +103,10 @@ Set/clear file execute flag of files to enable/disable init file or web api file
              |     |        +-- 01-db-pg.js     // for Postgresql
              |     |        +-- 02-db-mssql.js  // for Sql server
              |     |        +-- 02-db-mysql.js  // for Mysql
+             |     |
+             |     +------ vies
+             |     |        +-- login.hjs       // hjs template
+             |     |        +-- xxx.hjs
              |     |
              |     +------ root
              |              +-- api::test           // in windows, use 'api#test', linux work's for both
