@@ -71,10 +71,12 @@ To make a folder contain api js file, just add `api::` to that folder name. Some
 
 # Runtime data structure
 
-Http request handler function is called by express. jsweb object a property of express object : `req.app`
+System information share with request callback via  : `req.jw`
 
 ```
-    req.app.jsweb = {
+    req.jw = {
+        app : <express object>  // system object
+               // object below is create by demo init program
         db : {
             pg    : <function to access Postgresql>
             mysql : <function to access Mysql>
@@ -82,6 +84,7 @@ Http request handler function is called by express. jsweb object a property of e
         }
     }
 ```
+
 
 # Enable/Disable file
 
