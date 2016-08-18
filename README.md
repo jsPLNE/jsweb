@@ -104,18 +104,18 @@ Set/clear file execute flag of files to enable/disable init file or web api file
              |     |        +-- 02-db-mssql.js  // for Sql server
              |     |        +-- 02-db-mysql.js  // for Mysql
              |     |
-             |     +------ vies
+             |     +------ views
              |     |        +-- login.hjs       // hjs template
              |     |        +-- xxx.hjs
              |     |
              |     +------ root
              |              +-- api::test           // in windows, use 'api#test', linux work's for both
-             |              |      +-- hello.js     // http://localhost:8000/api/test/hello
-             |              |      +-- echo.js      // http://localhost:8000/api/test/echo
-             |              |      +-- db-query.js  // http://localhost:8000/api/test/db-query
+             |              |      +-- hello.js     // http://localhost:8000/test/hello
+             |              |      +-- echo.js      // http://localhost:8000/test/echo
+             |              |      +-- db-query.js  // http://localhost:8000/test/db-query
              |              |      +-- other
-             |              |          +-- hello.js     // http://localhost:8000/api/test/other/hello
-             |              |          +-- echo.js      // http://localhost:8000/api/test/other/echo
+             |              |          +-- hello.js     // http://localhost:8000/test/other/hello
+             |              |          +-- echo.js      // http://localhost:8000/test/other/echo
              |              +-- index.html
              |              +-- others
              |                    +-- others
