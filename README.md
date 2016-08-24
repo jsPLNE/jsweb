@@ -34,7 +34,7 @@ After installed jsweb, just write the express request handle js file and put the
 
 ## Step 3 : Create your app directory or get demos
 ```
-   get demo project from https://github.com/jsplne/jsweb-demo
+  get demo project from https://github.com/jsplne/jsweb-demo
 ```
 
 ## Step 4 : Run
@@ -89,14 +89,17 @@ System information share with request callback via  : `req.jw`
 
 Set/clear file execute flag of files to enable/disable init file or web api file to be load.
 
-# API home directory structure (demos/api-root-test-simple)
+# Directory structure (single site)
 
 ```
-  <API HOME> +
+      <HOME> +
              |
              +--"8000"                         // port to listen
              |     +------ config
              |     |        +-- jsweb-config.json
+             |     |        +-- [jsweb.key]    // for https
+             |     |        +-- [jsweb.cert]
+             |     |        +-- [jsweb.ca]
              |     |
              |     +------ init
              |     |        +-- 01-db-pg.js     // for Postgresql
@@ -118,6 +121,53 @@ Set/clear file execute flag of files to enable/disable init file or web api file
              |              +-- index.html
              |              +-- others
              |                    +-- others
+             +--<port 2>
+             | 
+             ...
+
+```
+
+# Directory structure (virtual host)
+
+```
+      <HOME> +
+             |
+             +--"8000"                         // port to listen
+             |     +------ [config]
+             |     |        +-- [jsweb.key]    // for https
+             |     |        +-- [jsweb.cert]
+             |     |        +-- [jsweb.ca]
+             |     |
+             |     +------ www.host1.com
+             |     |           |
+             |     |           +...
+             |     |
+             |     +------ www.host2.com
+             |     |           |
+             |     |           +...
+             |     |
+             |     +------ www.host3.com
+             |                 |
+             |                 +------ init
+             |                 |        +-- 01-db-pg.js     // for Postgresql
+             |                 |        +-- 02-db-mssql.js  // for Sql server
+             |                 |        +-- 02-db-mysql.js  // for Mysql
+             |                 |
+             |                 +------ views
+             |                 |        +-- login.hjs       // hjs template
+             |                 |        +-- xxx.hjs
+             |                 |
+             |                 +------ root
+             |                          +-- api::test           // in windows, use 'api#test', linux work's for both
+             |                          |      +-- hello.js     // http://localhost:8000/test/hello
+             |                          |      +-- echo.js      // http://localhost:8000/test/echo
+             |                          |      +-- db-query.js  // http://localhost:8000/test/db-query
+             |                          |      +-- other
+             |                          |          +-- hello.js     // http://localhost:8000/test/other/hello
+             |                          |          +-- echo.js      // http://localhost:8000/test/other/echo
+             |                          +-- index.html
+             |                          +-- others
+             |                                +-- others
              +--<port 2>
              | 
              ...
