@@ -21,23 +21,36 @@ function get_ports(path) {
         return [];
     }
     var files = fs.readdirSync(path);
-    var ports = [];
+    var result = [];
     for (var i = 0; i < files.length; i++) {
-        var file        = files[i];
-        if (!/\d+/.test(file)) { continue; };
-        var port = parseInt(file, 10);
-        if (port < 0 || port > 65535) { continue; };
-        if (port < 1024 && process.getuid() !== 0) {
-            console.log("Port < 1024 need root user");
-            process.exit(-2);
-        };
-        var base = api_root + "/" + file;
-        ports.push({
-            port : port,
-            base : base
-        })
+        var folder = files[i];
+        var ports  = folder.split(";");
+        for (var j = 0; j < ports.length; j++) {
+            console.log(ports);
+            var port = ports[j].trim();
+            var tags = [];
+            if (/\d+\(.*\)/.test(port)) {
+                tags =port.match(/\(.*\)/g).join()
+                    .replace(/[\(\)]/g, "").split(';');
+                port = port.replace(/\(.*/, '');
+            } else if (!/\d+/.test(port)) {
+                continue;
+            };
+            var port = parseInt(port, 10);
+            if (port < 0 || port > 65535) { continue; };
+            if (port < 1024 && process.getuid() !== 0) {
+                console.log("Port < 1024 need root user");
+                process.exit(-2);
+            };
+            var base = api_root + "/" + folder;
+            result.push({
+                port : port,
+                base : base,
+                tags : tags
+            })
+        }
     }
-    return ports;
+    return result;
 };
 
 var ports = get_ports(api_root);
@@ -48,7 +61,10 @@ if (ports.length === 0) {
 var child_process = require('child_process');
 var servers = [];
 for (var i = 0; i < ports.length; i++) {
-    servers.push(child_process.fork(jsweb_home + "/lib/jsweb-server.js",
-                                    [ports[i].port, ports[i].base]));
+    servers.push(
+        child_process.fork(jsweb_home + "/lib/jsweb-server.js",
+                           [ports[i].port,
+                            ports[i].base,
+                            ports[i].tags.join('-')]));
 };
 
