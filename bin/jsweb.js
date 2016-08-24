@@ -58,6 +58,15 @@ if (ports.length === 0) {
     console.log("Can not find any directory contain jsweb at :", api_root);
     console.log("Please visit https://github.com/conwin/jsweb for more details.");
 }
+var port_list = [];
+for (var i = 0; i < ports.length; i++) {
+    if (port_list.indexOf(ports[i].port) >=0) {
+        console.error("Duplicate port: ", ports[i]);
+        process.exit(-5);
+    };
+    port_list.push(ports[i].port);
+}
+
 var child_process = require('child_process');
 var servers = [];
 for (var i = 0; i < ports.length; i++) {
