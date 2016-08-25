@@ -15,38 +15,18 @@ After installed jsweb, just write the express request handle js file and put the
 * Init script can be load before real api method load to prepare system like database object or connection
 * https support
 * virtual host support
+* Mustache template support buildin
 
 
-# Step by step
-
-## Step 1 : Install jsweb as system command
-```
-    > sudo npm install jsweb -g
-```
-## Step 2 : Test if jsweb install correctly
+# Run the demos
 
 ```
-   > jsweb
-   Can not find any directory contain jsWeb at : /home/usersrc/jsweb
-   Please visit https://github.com/jsplne/jsweb for more details.
-   
+    $ sudo npm install jsweb -g
+    $ git clone https://github.com/jsplne/jsweb-demo
+    $ jsweb jsweb-demo/static
+    $ jsweb jsweb-demo/api-server
+    $ jsweb jsweb-demo/vhost
 ```
-
-## Step 3 : Create your app directory or get demos
-```
-  get demo project from https://github.com/jsplne/jsweb-demo
-```
-
-## Step 4 : Run
-```
-  > jsweb [/path/to/web/site/home]
-```
-
-## Step 5 : Test the result
-```
-  > wget -q -O- "http://localhost:8000/api/hello"
-```
-
 
 # Namings
 
