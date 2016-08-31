@@ -16,6 +16,7 @@ After installed jsweb, just write the express request handle js file and put the
 * https support
 * virtual host support
 * Mustache template support buildin
+* Cluster support
 
 
 # Run the demos
@@ -161,4 +162,15 @@ Set/clear file execute flag of files to enable/disable init file or web api file
     $ openssl genrsa -out jsweb.key 1024
     $ openssl req -new -key jsweb.key -out jsweb.ca
     $ openssl x509 -req -in jsweb.ca -signkey jsweb.key -out jsweb.cert
+```
+
+# Cluster support
+
+Set port-config.json under the port folder with key/value: `"cluster" : true`
+
+## port-config.json
+```
+{
+    "cluster" : true
+}
 ```
