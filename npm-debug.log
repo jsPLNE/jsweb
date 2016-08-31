@@ -1,0 +1,87 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'publish' ]
+2 info using npm@2.15.5
+3 info using node@v4.4.6
+4 verbose publish [ '.' ]
+5 silly cache add args [ '.', null ]
+6 verbose cache add spec .
+7 silly cache add parsed spec Result {
+7 silly cache add   raw: '.',
+7 silly cache add   scope: null,
+7 silly cache add   name: null,
+7 silly cache add   rawSpec: '.',
+7 silly cache add   spec: '/home/gxy/src/jsweb',
+7 silly cache add   type: 'directory' }
+8 verbose addLocalDirectory /home/gxy/.npm/jsweb/0.1.4/package.tgz not in flight; packing
+9 verbose correctMkdir /home/gxy/.npm correctMkdir not in flight; initializing
+10 verbose tar pack [ '/home/gxy/.npm/jsweb/0.1.4/package.tgz',
+10 verbose tar pack   '/home/gxy/src/jsweb' ]
+11 verbose tarball /home/gxy/.npm/jsweb/0.1.4/package.tgz
+12 verbose folder /home/gxy/src/jsweb
+13 info prepublish jsweb@0.1.4
+14 verbose addLocalTarball adding from inside cache /home/gxy/.npm/jsweb/0.1.4/package.tgz
+15 verbose correctMkdir /home/gxy/.npm correctMkdir not in flight; initializing
+16 silly cache afterAdd jsweb@0.1.4
+17 verbose afterAdd /home/gxy/.npm/jsweb/0.1.4/package/package.json not in flight; writing
+18 verbose correctMkdir /home/gxy/.npm correctMkdir not in flight; initializing
+19 verbose afterAdd /home/gxy/.npm/jsweb/0.1.4/package/package.json written
+20 silly publish { name: 'jsweb',
+20 silly publish   version: '0.1.4',
+20 silly publish   description: 'A Simple Web Server with js.',
+20 silly publish   main: 'index.js',
+20 silly publish   bin: { jsweb: 'bin/jsweb.js' },
+20 silly publish   dependencies:
+20 silly publish    { pg: '*',
+20 silly publish      mu2: '*',
+20 silly publish      mssql: '*',
+20 silly publish      mysql: '*',
+20 silly publish      st: '*',
+20 silly publish      express: '*',
+20 silly publish      'body-parser': '*' },
+20 silly publish   scripts: {},
+20 silly publish   repository: { type: 'git', url: 'git@github.com:jsPLNE/jsweb.git' },
+20 silly publish   keywords: [ 'web', 'api', 'framework' ],
+20 silly publish   author: { name: 'Gxy' },
+20 silly publish   license: 'MIT',
+20 silly publish   readme: '# jsWeb - Simple Web Server with Javascript\n\njsWeb is a program to simplify web api based on express development.\nAfter installed jsweb, just write the express request handle js file and put them to the correctly directlry. Start with command:\n\n```\n  > jsweb [/path/to/site/home]\n```\n\n# Features\n\n* Everythings of the site in single folder.\n* Multiple port support, each port is a standalone process\n* Auto reload, Add/Modify/Delete api file doesn\'t need restart server\n* Init script can be load before real api method load to prepare system like database object or connection\n* https support\n* virtual host support\n* Mustache template support buildin\n* Cluster support\n\n\n# Run the demos\n\n```\n    $ sudo npm install jsweb -g\n    $ git clone https://github.com/jsplne/jsweb-demo\n    $ jsweb jsweb-demo/static\n    $ jsweb jsweb-demo/api-server\n    $ jsweb jsweb-demo/vhost\n```\n\n# Namings\n\n```\n    name[(tag[;tag[...]])]\n```\n\n## tags for port folder\n\n* `https`  This is a https port\n\n## tags for root folder\n\n* `api`   Root folder `.js` file treat as server side script, if `index.js` exists, website homepage will be the result of `index.js`\n\n## tags for 1st level inside root folder \n\n* `api`  Folder contain api script. all `.js` inside this folder will be called as api call, include subfolders.\n\n## tags for api `.js` file\n\n* GET    api will called for correspond http method, if omit, all method will called.\n* POST\n* PUT\n* ... all valid HTTP method\n\n\n# Runtime data structure\n\nSystem information share with request callback via  : `req.jw`\n\n```\n    req.jw = {\n        app : <express object>  // system object\n    }\n```\n\n\n# Enable/Disable file\n\nSet/clear file execute flag of files to enable/disable init file or web api file to be load.\n\n# Directory structure (single site)\n\n```\n      <HOME> +\n             |\n             +--"8000"                         // port to listen\n             |     +------ config\n             |     |        +-- jsweb-config.json\n             |     |        +-- [jsweb.key]    // for https\n             |     |        +-- [jsweb.cert]\n             |     |        +-- [jsweb.ca]\n             |     |\n             |     +------ init\n             |     |        +-- 01-db-pg.js     // for Postgresql\n             |     |        +-- 02-db-mssql.js  // for Sql server\n             |     |        +-- 02-db-mysql.js  // for Mysql\n             |     |\n             |     +------ views\n             |     |        +-- login.hjs       // hjs template\n             |     |        +-- xxx.hjs\n             |     |\n             |     +------ root\n             |              +-- api::test           // in windows, use \'api#test\', linux work\'s for both\n             |              |      +-- hello.js     // http://localhost:8000/test/hello\n             |              |      +-- echo.js      // http://localhost:8000/test/echo\n             |              |      +-- db-query.js  // http://localhost:8000/test/db-query\n             |              |      +-- other\n             |              |          +-- hello.js     // http://localhost:8000/test/other/hello\n             |              |          +-- echo.js      // http://localhost:8000/test/other/echo\n             |              +-- index.html\n             |              +-- others\n             |                    +-- others\n             +--<port 2>\n             | \n             ...\n\n```\n\n# Directory structure (virtual host)\n\n```\n      <HOME> +\n             |\n             +--"8000"                         // port to listen\n             |     +------ [config]\n             |     |        +-- [jsweb.key]    // for https\n             |     |        +-- [jsweb.cert]\n             |     |        +-- [jsweb.ca]\n             |     |\n             |     +------ www.host1.com\n             |     |           |\n             |     |           +...\n             |     |\n             |     +------ www.host2.com\n             |     |           |\n             |     |           +...\n             |     |\n             |     +------ www.host3.com\n             |                 |\n             |                 +------ init\n             |                 |        +-- 01-db-pg.js     // for Postgresql\n             |                 |        +-- 02-db-mssql.js  // for Sql server\n             |                 |        +-- 02-db-mysql.js  // for Mysql\n             |                 |\n             |                 +------ views\n             |                 |        +-- login.hjs       // hjs template\n             |                 |        +-- xxx.hjs\n             |                 |\n             |                 +------ root\n             |                          +-- api::test           // in windows, use \'api#test\', linux work\'s for both\n             |                          |      +-- hello.js     // http://localhost:8000/test/hello\n             |                          |      +-- echo.js      // http://localhost:8000/test/echo\n             |                          |      +-- db-query.js  // http://localhost:8000/test/db-query\n             |                          |      +-- other\n             |                          |          +-- hello.js     // http://localhost:8000/test/other/hello\n             |                          |          +-- echo.js      // http://localhost:8000/test/other/echo\n             |                          +-- index.html\n             |                          +-- others\n             |                                +-- others\n             +--<port 2>\n             | \n             ...\n\n```\n\n# https certificate file generate\n\n```\n    cd /path/to/https-port/config\n    $ openssl genrsa -out jsweb.key 1024\n    $ openssl req -new -key jsweb.key -out jsweb.ca\n    $ openssl x509 -req -in jsweb.ca -signkey jsweb.key -out jsweb.cert\n```\n\n# Cluster support\n\nSet port-config.json under the port folder with key/value: `"cluster" : true`\n\n## port-config.json\n```\n{\n    "cluster" : true\n}\n```\n',
+20 silly publish   readmeFilename: 'README.md',
+20 silly publish   gitHead: 'c1b5dab1bf2acbb2861166b6ffa22cfce6388b52',
+20 silly publish   bugs: { url: 'https://github.com/jsPLNE/jsweb/issues' },
+20 silly publish   homepage: 'https://github.com/jsPLNE/jsweb',
+20 silly publish   _id: 'jsweb@0.1.4',
+20 silly publish   _shasum: '5235e7b2f0bf996dd9986ddcf19dc7b7e418e98f',
+20 silly publish   _from: '.' }
+21 verbose getPublishConfig undefined
+22 silly mapToRegistry name jsweb
+23 silly mapToRegistry using default registry
+24 silly mapToRegistry registry https://registry.npmjs.org/
+25 silly mapToRegistry data Result {
+25 silly mapToRegistry   raw: 'jsweb',
+25 silly mapToRegistry   scope: null,
+25 silly mapToRegistry   name: 'jsweb',
+25 silly mapToRegistry   rawSpec: '',
+25 silly mapToRegistry   spec: 'latest',
+25 silly mapToRegistry   type: 'tag' }
+26 silly mapToRegistry uri https://registry.npmjs.org/jsweb
+27 verbose publish registryBase https://registry.npmjs.org/
+28 silly publish uploading /home/gxy/.npm/jsweb/0.1.4/package.tgz
+29 verbose stack Error: auth required for publishing
+29 verbose stack     at CachingRegistryClient.publish (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/publish.js:30:14)
+29 verbose stack     at /usr/local/lib/node_modules/npm/lib/publish.js:134:14
+29 verbose stack     at mapToRegistry (/usr/local/lib/node_modules/npm/lib/utils/map-to-registry.js:62:3)
+29 verbose stack     at publish_ (/usr/local/lib/node_modules/npm/lib/publish.js:104:3)
+29 verbose stack     at Array.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/slide/lib/bind-actor.js:15:8)
+29 verbose stack     at LOOP (/usr/local/lib/node_modules/npm/node_modules/slide/lib/chain.js:15:14)
+29 verbose stack     at LOOP (/usr/local/lib/node_modules/npm/node_modules/slide/lib/chain.js:14:28)
+29 verbose stack     at chain (/usr/local/lib/node_modules/npm/node_modules/slide/lib/chain.js:20:5)
+29 verbose stack     at /usr/local/lib/node_modules/npm/lib/publish.js:73:5
+29 verbose stack     at RES (/usr/local/lib/node_modules/npm/node_modules/inflight/inflight.js:23:14)
+30 verbose cwd /home/gxy/src/jsweb
+31 error Linux 3.13.0-66-generic
+32 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "publish"
+33 error node v4.4.6
+34 error npm  v2.15.5
+35 error code ENEEDAUTH
+36 error need auth auth required for publishing
+36 error need auth You need to authorize this machine using `npm adduser`
+37 verbose exit [ 1, true ]

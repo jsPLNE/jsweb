@@ -1,6 +1,6 @@
 {
     "name": "jsweb",
-    "version": "0.1.3",
+    "version": "0.1.4",
     "description": "A Simple Web Server with js.",
     "main": "index.js",
     "bin": {
