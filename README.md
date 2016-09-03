@@ -9,21 +9,28 @@ After installed jsweb, just write the express request handle js file and put the
 
 # Features
 
-* Everythings of the site in single folder.
+* Everythings of web site in single folder.
 * Multiple port support, each port is a standalone process
 * Auto reload, Add/Modify/Delete api file doesn't need restart server
-* Init script can be load before real api method load to prepare system like database object or connection
-* https support
-* virtual host support
+* Init script loaded before real api method load to prepare system like database object or connection
+* Https support
+* Virtual host support
 * Mustache template support buildin
 * Cluster support
 * Parameter URL support
 
 
-# Run the demos
+# Installation
 
 ```
     $ sudo npm install jsweb -g
+```
+
+* `jsweb` is not a nodejs module but a system tools to run your web.
+
+# Run the demos
+
+```
     $ git clone https://github.com/jsplne/jsweb-demo
     $ jsweb jsweb-demo/static
     $ jsweb jsweb-demo/api-server
@@ -74,88 +81,8 @@ Set/clear file execute flag of files to enable/disable init file or web api file
 
 # Directory structure (single site)
 
-```
-      <HOME> +
-             |
-             +--"8000"                         // port to listen
-             |     +------ config
-             |     |        +-- jsweb-config.json
-             |     |        +-- [jsweb.key]    // for https
-             |     |        +-- [jsweb.cert]
-             |     |        +-- [jsweb.ca]
-             |     |
-             |     +------ init
-             |     |        +-- 01-db-pg.js     // for Postgresql
-             |     |        +-- 02-db-mssql.js  // for Sql server
-             |     |        +-- 02-db-mysql.js  // for Mysql
-             |     |
-             |     +------ views
-             |     |        +-- login.hjs       // hjs template
-             |     |        +-- xxx.hjs
-             |     |
-             |     +------ root
-             |              +-- api::test           // in windows, use 'api#test', linux work's for both
-             |              |      +-- hello.js     // http://localhost:8000/test/hello
-             |              |      +-- echo.js      // http://localhost:8000/test/echo
-             |              |      +-- db-query.js  // http://localhost:8000/test/db-query
-             |              |      +-- other
-             |              |          +-- hello.js     // http://localhost:8000/test/other/hello
-             |              |          +-- echo.js      // http://localhost:8000/test/other/echo
-             |              +-- index.html
-             |              +-- others
-             |                    +-- others
-             +--<port 2>
-             | 
-             ...
+See [jsweb-demo](https://github.com/jsPLNE/jsweb-demo)
 
-```
-
-# Directory structure (virtual host)
-
-```
-      <HOME> +
-             |
-             +--"8000"                         // port to listen
-             |     +------ [config]
-             |     |        +-- [jsweb.key]    // for https
-             |     |        +-- [jsweb.cert]
-             |     |        +-- [jsweb.ca]
-             |     |
-             |     +------ www.host1.com
-             |     |           |
-             |     |           +...
-             |     |
-             |     +------ www.host2.com
-             |     |           |
-             |     |           +...
-             |     |
-             |     +------ www.host3.com
-             |                 |
-             |                 +------ init
-             |                 |        +-- 01-db-pg.js     // for Postgresql
-             |                 |        +-- 02-db-mssql.js  // for Sql server
-             |                 |        +-- 02-db-mysql.js  // for Mysql
-             |                 |
-             |                 +------ views
-             |                 |        +-- login.hjs       // hjs template
-             |                 |        +-- xxx.hjs
-             |                 |
-             |                 +------ root
-             |                          +-- api::test           // in windows, use 'api#test', linux work's for both
-             |                          |      +-- hello.js     // http://localhost:8000/test/hello
-             |                          |      +-- echo.js      // http://localhost:8000/test/echo
-             |                          |      +-- db-query.js  // http://localhost:8000/test/db-query
-             |                          |      +-- other
-             |                          |          +-- hello.js     // http://localhost:8000/test/other/hello
-             |                          |          +-- echo.js      // http://localhost:8000/test/other/echo
-             |                          +-- index.html
-             |                          +-- others
-             |                                +-- others
-             +--<port 2>
-             | 
-             ...
-
-```
 
 # https certificate file generate
 
