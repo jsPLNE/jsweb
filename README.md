@@ -17,6 +17,7 @@ After installed jsweb, just write the express request handle js file and put the
 * virtual host support
 * Mustache template support buildin
 * Cluster support
+* Parameter URL support
 
 
 # Run the demos
@@ -43,9 +44,10 @@ After installed jsweb, just write the express request handle js file and put the
 
 * `api`   Root folder `.js` file treat as server side script, if `index.js` exists, website homepage will be the result of `index.js`
 
-## tags for 1st level inside root folder 
+## tags for inside folder 
 
-* `api`  Folder contain api script. all `.js` inside this folder will be called as api call, include subfolders.
+* `api`   Folder contain api script. all `.js` inside this folder will be called as api call, include subfolders.
+* `param` Folder correspond URL position will be inteperate as req.params object member, folder name as the member name, URL path will be the value
 
 ## tags for api `.js` file
 
@@ -174,3 +176,18 @@ Set port-config.json under the port folder with key/value: `"cluster" : true`
     "cluster" : true
 }
 ```
+
+# About parameter URL
+
+* `api's` priority is higher than param `param` folder**
+* `index.js` under `param` folder will be called when url point to that folder
+* `param` can set multiple level.
+
+
+* `param` folder examples
+
+```
+  /root/org(param)/user(param)/device(param)/index.js
+  /root/org(param)/user(param)/device(param)/index.js
+```
+
