@@ -56,7 +56,7 @@ function get_ports(path) {
 var ports = get_ports(api_root);
 if (ports.length === 0) {
     console.log("Can not find any directory contain jsweb at :", api_root);
-    console.log("Please visit https://github.com/conwin/jsweb for more details.");
+    console.log("Please visit https://github.com/jsplne/jsweb for more details.");
 }
 var port_list = [];
 for (var i = 0; i < ports.length; i++) {
