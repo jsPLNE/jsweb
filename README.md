@@ -118,3 +118,8 @@ Set port-config.json under the port folder with key/value: `"cluster" : true`
   /root/org(param)/user(param)/device(param)/index.js
 ```
 
+
+
+# About Views
+
+Put variables you want to reder within view to  `res.locals` and `res.render(...)`
