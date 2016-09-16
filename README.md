@@ -12,7 +12,7 @@ After installed jsweb, just write the express request handle js file and put the
 * Everythings of web site in single folder.
 * Multiple port support, each port is a standalone process
 * Auto reload, Add/Modify/Delete api file doesn't need restart server
-* Init script loaded before real api method load to prepare system like database object or connection
+* Async init script loaded before real api method load to prepare system like database object or connection
 * Https support
 * Virtual host support
 * Mustache template support buildin
@@ -123,3 +123,22 @@ Set port-config.json under the port folder with key/value: `"cluster" : true`
 # About Views
 
 Put variables you want to reder within view to  `res.locals` and `res.render(...)`
+
+
+# `req.jw` object
+
+* `req.jw.port.home`
+* `req.jw.port.port`
+* `req.jw.port.protocol`
+* `req.jw.port.tags`
+* `req.jw.port.config`
+* `req.jw.home`
+* `req.jw.root`
+* `req.jw.config`
+* `req.jw.hostname`
+
+# `<home>/jsweb-config`
+
+* `debug`   : true or fasle
+* `cluster` : true or fase
+* `public`  : array
