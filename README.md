@@ -100,7 +100,14 @@ Set port-config.json under the port folder with key/value: `"cluster" : true`
 ## port-config.json
 ```
 {
-    "cluster" : true
+    "cluster" : true,
+    "tls" {
+        "key"  : "/path/to/key/file",  default to 
+        "cert" : "/path/to/cert/file",
+        "ca"   : "/path/to/ca/file",
+        "rejectUnauthorized" : true | false,
+        "requestCert"        : true | false
+    }
 }
 ```
 
