@@ -18,6 +18,7 @@ After installed jsweb, just write the express request handle js file and put the
 * Mustache template support buildin
 * Cluster support
 * Parameter URL support
+* TLS session resume support
 
 
 # Installation
