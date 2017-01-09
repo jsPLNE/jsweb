@@ -1,6 +1,6 @@
 {
     "name": "jsweb",
-    "version": "0.2.13",
+    "version": "0.2.14",
     "description": "A simple but powerful web server with js.",
     "main": "index.js",
     "bin": {
@@ -14,7 +14,8 @@
         "st"          : "*",
         "express"     : "*",
         "body-parser" : "*",
-        "strong-cluster-tls-store" : "*"
+        "strong-cluster-tls-store" : "*",
+        "strong-store-cluster": "^1.x"
     },
     "scripts": {
     },
