@@ -57,6 +57,7 @@ After installed jsweb, just write the express request handle js file and put the
 
 * `api`   Folder contain api script. all `.js` inside this folder will be called as api call, include subfolders.
 * `param` Folder correspond URL position will be inteperate as req.params object member, folder name as the member name, URL path will be the value
+* `final` Match rest of url after final tag as req.params.final
 
 ## tags for api `.js` file
 
