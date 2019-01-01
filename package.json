@@ -7,18 +7,18 @@
         "jsweb": "bin/jsweb.js"
     },
     "dependencies": {
-        "pg"          : "*",
-        "mu2"         : "*",
-        "mssql"       : "*",
-        "mysql"       : "*",
-        "serve-static" : "*",
-        "express"     : "*",
-        "body-parser" : "*",
-        "strong-cluster-tls-store" : "*",
+        "pg": "*",
+        "mu2": "*",
+        "mssql": "*",
+        "mysql": "*",
+        "getopts": "*",
+        "serve-static": "*",
+        "express": "*",
+        "body-parser": "*",
+        "strong-cluster-tls-store": "*",
         "strong-store-cluster": "^1.x"
     },
-    "scripts": {
-    },
+    "scripts": {},
     "repository": {
         "type": "git",
         "url": "git@github.com:jsPLNE/jsweb.git"
