@@ -6,30 +6,27 @@ var jsweb_home = __dirname + "/..";
 
 var opts       = getopts(process.argv.slice(2),
                          {
-                             alias : {
-                                 port : [ "port", "P"]
-                             },
-                             string : ["root", "p", "port"]
+                             string : ["site", "port"]
                          });
 
 
-if (!opts.root) {
+if (!opts.site) {
     if (opts._.length == 0 ) {
-        opts.root = process.cwd();
+        opts.site = process.cwd();
     } else {
-        opts.root = opts._[0];
+        opts.site = opts._[0];
     }
 }
-if (opts.root[0] !== '/') {
+if (opts.site[0] !== '/') {
     try {
-        process.chdir(opts.root);
-        opts.root = process.cwd();
+        process.chdir(opts.site);
+        opts.site = process.cwd();
     } catch (error) {
-        console.error(opts.root, " is not a valid directory");
+        console.error(opts.site, " is not a valid directory");
         process.exit(-2);
     }
 }
-// console.log("opts.root  = ", opts.root);
+// console.log("opts.site  = ", opts.site);
 // console.log("jsweb_home = ", jsweb_home);
 
 function folder_to_ports(folder, opt_port) {
@@ -56,7 +53,7 @@ function folder_to_ports(folder, opt_port) {
             console.log("Port < 1024 need root user");
             process.exit(-2);
         };
-        var base = opts.root + "/" + folder;
+        var base = opts.site + "/" + folder;
         if (opt_port) {
             base = folder;
         }
@@ -84,12 +81,12 @@ function get_ports(path) {
 };
 var ports = [];
 if (!opts.port) {
-    ports = get_ports(opts.root);
+    ports = get_ports(opts.site);
 } else {
-    ports = folder_to_ports(opts.root, opts.port);
+    ports = folder_to_ports(opts.site, opts.port);
 }
 if (ports.length === 0) {
-    console.log("Can not find any directory contain jsweb at :", opts.root);
+    console.log("Can not find any directory contain jsweb at :", opts.site);
     console.log("Please visit https://github.com/jsplne/jsweb for more details.");
 }
 

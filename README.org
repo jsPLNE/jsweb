@@ -7,7 +7,7 @@ After installed jsweb, just write the express request handle js file and put the
 #+BEGIN_SRC sh
 
   > jsweb [/path/to/site/home]
-  > jsweb --root=/path/to/site/home --port=8888
+  > jsweb --site=/path/to/site/home --port=8888
 
 #+END_SRC
 
@@ -145,6 +145,7 @@ Set port-config.json under the port folder with key/value: ="cluster" : true=
   - =req.jw.port.config=
   - =req.jw.home=
   - =req.jw.root=
+  - =req.jw.lib=
   - =req.jw.config=
   - =req.jw.hostname=
 
