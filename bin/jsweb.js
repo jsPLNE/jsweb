@@ -41,7 +41,6 @@ function folder_to_ports(folder, opt_port) {
         ports = folder.split(";");
     }
     for (var j = 0; j < ports.length; j++) {
-        console.log(ports[j]);
         var port = ports[j].trim();
         var tags = [];
         if (/\d+\(.*\)/.test(port)) {
@@ -79,7 +78,7 @@ function get_ports(path) {
     var files = fs.readdirSync(path);
     var result = [];
     for (var i = 0; i < files.length; i++) {
-        result.concat(folder_to_ports(files[i]));
+        result = result.concat(folder_to_ports(files[i]));
     }
     return result;
 };
