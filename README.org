@@ -153,11 +153,12 @@ Set port-config.json under the port folder with key/value: ="cluster" : true=
 
 * http proxy support
 
-  - api文件名必须包含proxy
+  - API file name must contain =proxy= 
   - Support for two api file formats:
 
 #+BEGIN_SRC javascript
-    module.exports = { target:'<url>' }  // url is proxy target hostname and port like : http://192.168.0.1:8000
+    module.exports = { target:'<url>' }   // url is proxy target hostname and port 
+                                          // example : http://192.168.0.1:8000
 #+END_SRC
 
 #+BEGIN_SRC javascript
