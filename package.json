@@ -1,6 +1,6 @@
 {
     "name": "jsweb",
-    "version": "0.3.14",
+    "version": "0.3.15",
     "description": "A simple but powerful web server with js.",
     "main": "index.js",
     "bin": {
@@ -13,6 +13,7 @@
         "mysql": "*",
         "getopts": "*",
         "serve-static": "*",
+        "http-proxy": "*",
         "express": "*",
         "body-parser": "*",
         "strong-cluster-tls-store": "*",
