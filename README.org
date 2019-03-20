@@ -107,6 +107,7 @@ Set port-config.json under the port folder with key/value: ="cluster" : true=
 
 #+BEGIN_SRC json
 {
+    "bind" : "127.0.0.1",
     "cluster" : true,
     "tls" {
         "key"  : "/path/to/key/file",  default to 
