@@ -102,10 +102,17 @@ for (var i = 0; i < ports.length; i++) {
 var child_process = require('child_process');
 var servers = [];
 for (var i = 0; i < ports.length; i++) {
-    servers.push(
-        child_process.fork(jsweb_home + "/lib/jsweb-server.js",
-                           [ports[i].port,
-                            ports[i].base,
-                            ports[i].tags.join('-')]));
+    var server = {
+        port : ports[i].port,
+        base : ports[i].base,
+        tags : ports[i].tags.join('-')
+    }
+    var params = [server.port, server.base, server.tags];
+    server.child = child_process.fork(
+        jsweb_home + "/lib/jsweb-server.js", params);
+    server.child.on('exit', function () {
+        this.child = child_process.fork(jsweb_home + "/lib/jsweb-server.js",
+                                      [this.port, this.base, this.tags]);
+    }.bind(server));
+    servers.push(server);
 };
-
