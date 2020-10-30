@@ -69,7 +69,6 @@ After installed jsweb, just write the express request handle js file and put the
     - PUT
     - ... all valid HTTP method
 
-
 * Runtime data structure
 
 System information share with request callback via  : =req.jw=
@@ -80,7 +79,6 @@ System information share with request callback via  : =req.jw=
     }
 #+END_SRC
 
-
 * Enable/Disable file
 
 Set/clear file execute flag of files to enable/disable init file or web api file to be load.
@@ -88,7 +86,6 @@ Set/clear file execute flag of files to enable/disable init file or web api file
 * Directory structure (single site)
 
 See [jsweb-demo](https://github.com/jsPLNE/jsweb-demo)
-
 
 * https certificate file generate
 
@@ -132,7 +129,6 @@ Set port-config.json under the port folder with key/value: ="cluster" : true=
         /root/org(param)/user(param)/device(param)/index.js
       #+END_SRC
 
-
 * About Views
 
   Put variables you want to reder within view to  =res.locals= and =res.render(...)=
@@ -155,3 +151,22 @@ Set port-config.json under the port folder with key/value: ="cluster" : true=
   - =debug=   : true or fasle
   - =cluster= : true or fase
   - =public=  : array
+
+* http proxy support
+
+  - API file name must contain =proxy= 
+  - Support for two api file formats:
+
+#+BEGIN_SRC javascript
+    module.exports = { target:'<url>' }   // url is proxy target hostname and port 
+                                          // example : http://192.168.0.1:8000
+#+END_SRC
+
+#+BEGIN_SRC javascript
+    module.exports = function (jw) {
+        var proxy = {
+            target : jw.config.proxyhost
+        };
+        return proxy;           
+    }
+#+END_SRC
