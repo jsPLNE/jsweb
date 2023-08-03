@@ -1,23 +1,25 @@
 {
     "name": "jsweb",
-    "version": "0.3.18",
+    "version": "0.3.20",
     "description": "A simple but powerful web server with js.",
     "main": "index.js",
     "bin": {
         "jsweb": "bin/jsweb.js"
     },
     "dependencies": {
-        "pg": "*",
-        "mu2": "*",
-        "mssql": "*",
-        "mysql": "*",
-        "getopts": "*",
-        "serve-static": "*",
-        "http-proxy": "*",
-        "express": "*",
         "body-parser": "*",
+        "express": "*",
+        "faye-websocket": "^0.11.4",
+        "getopts": "*",
+        "http-proxy": "*",
+        "mssql": "*",
+        "mu2": "*",
+        "mysql": "*",
+        "pg": "*",
+        "serve-static": "*",
         "strong-cluster-tls-store": "*",
-        "strong-store-cluster": "^1.x"
+        "strong-store-cluster": "^1.x",
+        "websocket-extensions": "^0.1.4"
     },
     "scripts": {},
     "repository": {
